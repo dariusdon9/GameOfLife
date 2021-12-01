@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.Random;
 
 import static com.example.gameoflife.DataBase.*;
@@ -27,40 +28,55 @@ public class Grid extends Application {
     private javafx.scene.shape.Rectangle rectangle1;
     private javafx.scene.shape.Rectangle rectangle2;
 
+    public static void main(String[] args) throws Exception {
+        refreshTable("Auto");
+        refreshID("Auto");
+        refreshTable("Semi");
+        refreshID("Semi");
+        refreshTable("Manual");
+        refreshID("Manual");
+        launch(args);
+        getConnection();
+    }
+
     @Override
     public void start(Stage stage) {
         GridPane pane = new GridPane();
-        pane.setMaxHeight(200);
-        pane.setMaxWidth(400);
+        pane.setMaxHeight(510);
+        pane.setMaxWidth(760);
         pane.setAlignment(CENTER);
 
-        for (int i=0;i<75;i++){
-            for(int j = 0;j<50; j++){
-                pane.add(new javafx.scene.shape.Rectangle(10,10),i,j);
+        for (int i = 0; i < 75; i++) {
+            for (int j = 0; j < 50; j++) {
+                pane.add(new javafx.scene.shape.Rectangle(10, 10, BLACK), i, j);
             }
         }
 
         GridPane pane2 = new GridPane();
-        pane2.setMaxHeight(200);
-        pane2.setMaxWidth(400);
+        pane2.setMaxHeight(510);
+        pane2.setMaxWidth(760);
         pane2.setAlignment(CENTER);
 
-        for (int i=0;i<75;i++){
-            for(int j = 0;j<50; j++){
-                pane2.add(new javafx.scene.shape.Rectangle(10,10, BLACK),i,j);
+        for (int i = 0; i < 75; i++) {
+            for (int j = 0; j < 50; j++) {
+                pane2.add(new javafx.scene.shape.Rectangle(10, 10, BLACK), i, j);
             }
         }
-
         GridPane pane1 = new GridPane();
-        pane1.setMaxHeight(200);
-        pane1.setMaxWidth(400);
+        pane1.setMaxHeight(510);
+        pane1.setMaxWidth(760);
         pane1.setAlignment(CENTER);
 
-        for (int i=0;i<75;i++){
-            for(int j = 0;j<50; j++){
-                pane1.add(new javafx.scene.shape.Rectangle(10,10),i,j);
+        for (int i = 0; i < 75; i++) {
+            for (int j = 0; j < 50; j++) {
+                pane1.add(new javafx.scene.shape.Rectangle(10, 10, BLACK), i, j);
             }
         }
+
+        pane.setGridLinesVisible(true);
+        pane1.setGridLinesVisible(true);
+        pane2.setGridLinesVisible(true);
+
         Button choice1 = new Button("Automated_Game_of_life");
         choice1.setFont(Font.font(14));
         choice1.setTextFill(Color.RED);
@@ -93,12 +109,23 @@ public class Grid extends Application {
         refresh1.setTextFill(GREEN);
         refresh1.setAlignment(CENTER);
         refresh1.setFont(Font.font(14));
-        refresh1.setOnAction(e->{
-            for (int i=0;i<75;i++){
-                for(int j = 0;j<50; j++){
-                    pane.add(new javafx.scene.shape.Rectangle(10,10,BLACK),i,j);
+        refresh1.setOnAction(e-> {
+            for (int i = 0; i < 75; i++) {
+                for (int j = 0; j < 50; j++) {
+                    pane.add(new javafx.scene.shape.Rectangle(10, 10, BLACK), i, j);
                 }
             }
+            try {
+                refreshTable("Manual");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            try {
+                refreshID("Manual");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            pane.setGridLinesVisible(true);
         });
 
         Button refresh2 = new Button("Refresh");
@@ -111,28 +138,45 @@ public class Grid extends Application {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            for (int i=0;i<75;i++){
-                for(int j = 0;j<50; j++){
-                    pane1.add(new javafx.scene.shape.Rectangle(10,10),i,j);
+            for (int i = 0; i < 75; i++) {
+                for (int j = 0; j < 50; j++) {
+                    pane1.add(new javafx.scene.shape.Rectangle(10, 10), i, j);
                 }
             }
+            try {
+                refreshTable("Auto");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            try {
+                refreshID("Auto");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            pane1.setGridLinesVisible(true);
         });
 
         Button refresh3 = new Button("Refresh");
         refresh3.setTextFill(GREEN);
         refresh3.setAlignment(CENTER);
         refresh3.setFont(Font.font(14));
-        refresh3.setOnAction(e->{
+        refresh3.setOnAction(e-> {
             try {
                 refreshTable("Semi");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            for (int i=0;i<75;i++){
-                for(int j = 0;j<50; j++){
-                    pane2.add(new javafx.scene.shape.Rectangle(10,10),i,j);
+            try {
+                refreshID("Semi");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            for (int i = 0; i < 75; i++) {
+                for (int j = 0; j < 50; j++) {
+                    pane2.add(new javafx.scene.shape.Rectangle(10, 10), i, j);
                 }
             }
+            pane2.setGridLinesVisible(true);
         });
         Button start1 = new Button("Start");
         start1.setFont(Font.font(14));
@@ -539,13 +583,5 @@ public class Grid extends Application {
         back3.setOnAction(e->stage.setScene(home_scene));
         stage.setScene(home_scene);
         stage.show();
-    }
-    public static void main(String[] args) throws Exception {
-        refreshTable("Auto");
-        refreshTable("Semi");
-        refreshTable("Manual");
-        createTable("Manual");
-        launch(args);
-        getConnection();
     }
 }

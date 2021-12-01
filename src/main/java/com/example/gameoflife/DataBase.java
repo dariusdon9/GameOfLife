@@ -3,6 +3,7 @@ package com.example.gameoflife;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 
 public class DataBase {
@@ -31,8 +32,9 @@ public class DataBase {
         DataBase.name = name;
         Connection connection = getConnection();
         assert connection != null;
-        PreparedStatement refresh = connection.prepareStatement("DELETE FROM TEST."+name +" " + "WHERE 1=1");
-        refresh.executeUpdate();
+        try (PreparedStatement refresh = connection.prepareStatement("delete from test.Semi where ID > 0 and ID <1000")) {
+            refresh.executeUpdate();
+        }
     }
 
     public static void createTable(String name) {
@@ -41,7 +43,7 @@ public class DataBase {
             Connection connection = getConnection();
             assert connection != null;
             PreparedStatement create = connection.prepareStatement(
-                    "CREATE TABLE "+name+"(ID INT NOT NULL AUTO_INCREMENT,CELL_X_COORDINATE INT,CELL_Y_COORDINATE INT,CELL_TYPE VARCHAR(255),PRIMARY KEY(ID))"
+                    "CREATE TABLE " + name + "(ID INT NOT NULL AUTO_INCREMENT,CELL_X_COORDINATE INT,CELL_Y_COORDINATE INT,CELL_TYPE VARCHAR(255)"
             );
             create.executeUpdate();
 
@@ -65,9 +67,16 @@ public class DataBase {
             posted.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
-        finally{
+        } finally {
             System.out.println("Insert Completed");
         }
+    }
+
+    public static void refreshID(String name) throws SQLException {
+        DataBase.name = name;
+        Connection connection = getConnection();
+        assert connection != null;
+        PreparedStatement refresh = connection.prepareStatement("ALTER TABLE " + name + " auto_increment = 0");
+        refresh.executeUpdate();
     }
 }
