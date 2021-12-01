@@ -36,9 +36,11 @@ public class Grid extends Application {
 
         for (int i=0;i<75;i++){
             for(int j = 0;j<50; j++){
-                pane.add(new javafx.scene.shape.Rectangle(10,10),i,j);
+                pane.add(new javafx.scene.shape.Rectangle(10,10, BLACK),i,j);
             }
         }
+
+        pane.setGridLinesVisible(true);
 
         GridPane pane2 = new GridPane();
         pane2.setMaxHeight(200);
@@ -51,6 +53,8 @@ public class Grid extends Application {
             }
         }
 
+        pane2.setGridLinesVisible(true);
+
         GridPane pane1 = new GridPane();
         pane1.setMaxHeight(200);
         pane1.setMaxWidth(400);
@@ -58,9 +62,12 @@ public class Grid extends Application {
 
         for (int i=0;i<75;i++){
             for(int j = 0;j<50; j++){
-                pane1.add(new javafx.scene.shape.Rectangle(10,10),i,j);
+                pane1.add(new javafx.scene.shape.Rectangle(10,10, BLACK),i,j);
             }
         }
+
+        pane1.setGridLinesVisible(true);
+
         Button choice1 = new Button("Automated_Game_of_life");
         choice1.setFont(Font.font(14));
         choice1.setTextFill(Color.RED);
@@ -107,7 +114,7 @@ public class Grid extends Application {
         refresh2.setFont(Font.font(14));
         refresh2.setOnAction(e->{
             try {
-                refreshTable("Auto");
+//                refreshTable("Auto");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -124,7 +131,7 @@ public class Grid extends Application {
         refresh3.setFont(Font.font(14));
         refresh3.setOnAction(e->{
             try {
-                refreshTable("Semi");
+//                refreshTable("Semi");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -140,7 +147,7 @@ public class Grid extends Application {
         start1.setOnAction(e-> {
                     food_field.getText();
             try {
-                createTable("Auto");
+//                createTable("Auto");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -177,7 +184,7 @@ public class Grid extends Application {
                                                 pane1.add(rectangle1, xcoord1, ycoord1);
                                                 Cell cell = new Cell(xcoord1,ycoord1," Sexed");
                                                 System.out.println(cell.getX() + " " + cell.getY() + " " + cell.getType());
-                                                enter(cell.getX(), cell.getY(), cell.getType());
+//                                                enter(cell.getX(), cell.getY(), cell.getType());
                                                 Thread.sleep(10);
                                             } catch (Exception ex) {
                                                 ex.printStackTrace();
@@ -187,7 +194,7 @@ public class Grid extends Application {
                                                 pane1.add(rectangle2, xcoord2, ycoord2);
                                                 Cell cell = new Cell(xcoord2,xcoord2," Asexual");
                                                 System.out.println(cell.getX() + " " + cell.getY() + " " + cell.getType());
-                                                enter(cell.getX(),cell.getY(),cell.getType());
+//                                                enter(cell.getX(),cell.getY(),cell.getType());
                                                 Thread.sleep(10);
                                             } catch (Exception ex) {
                                                 ex.printStackTrace();
@@ -279,7 +286,7 @@ public class Grid extends Application {
             int countsexed = parseInt(sexedcell.getText());
             int countasexual = parseInt(asexualcell.getText());
             try {
-                createTable("Semi");
+//                createTable("Semi");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -310,7 +317,7 @@ public class Grid extends Application {
                                     pane2.add(rectangle1, xcoord1, ycoord1);
                                     Cell cell = new Cell(xcoord1,ycoord1," Sexed");
                                 try {
-                                    enter(cell.getX(),cell.getY(),cell.getType());
+//                                    enter(cell.getX(),cell.getY(),cell.getType());
                                 } catch (Exception ex) {
                                     ex.printStackTrace();
                                 }
@@ -330,7 +337,7 @@ public class Grid extends Application {
                                 pane2.add(rectangle2, xcoord2, ycoord2);
                                 Cell cell = new Cell(xcoord2,ycoord2," Asexual");
                                 try {
-                                    enter(cell.getX(),cell.getY(),cell.getType());
+//                                    enter(cell.getX(),cell.getY(),cell.getType());
                                 } catch (Exception ex) {
                                     ex.printStackTrace();
                                 }
@@ -428,7 +435,7 @@ public class Grid extends Application {
                             System.out.println(y);
                             Cell cell = new Cell(x,y,"Sexed ");
                             try {
-                                enter(cell.getX(), cell.getY(),cell.getType());
+//                                enter(cell.getX(), cell.getY(),cell.getType());
                             } catch (Exception exc) {
                                 exc.printStackTrace();
                             }
@@ -463,7 +470,7 @@ public class Grid extends Application {
                             Cell cell = new Cell(x,y,"Asexed");
                             System.out.println(cell.getX()+ " " + cell.getY() + " " + cell.getType());
                             try {
-                                enter(cell.getX(), cell.getY(),cell.getType());
+//                                enter(cell.getX(), cell.getY(),cell.getType());
                             } catch (Exception exc) {
                                 exc.printStackTrace();
                             }
@@ -541,11 +548,11 @@ public class Grid extends Application {
         stage.show();
     }
     public static void main(String[] args) throws Exception {
-        refreshTable("Auto");
-        refreshTable("Semi");
-        refreshTable("Manual");
-        createTable("Manual");
+//        refreshTable("Auto");
+//        refreshTable("Semi");
+//        refreshTable("Manual");
+//        createTable("Manual");
         launch(args);
-        getConnection();
+//        getConnection();
     }
 }
