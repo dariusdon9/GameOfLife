@@ -36,9 +36,11 @@ public class Grid extends Application {
 
         for (int i=0;i<75;i++){
             for(int j = 0;j<50; j++){
-                pane.add(new javafx.scene.shape.Rectangle(10,10),i,j);
+                pane.add(new javafx.scene.shape.Rectangle(10,10, BLACK),i,j);
             }
         }
+
+        pane.setGridLinesVisible(true);
 
         GridPane pane2 = new GridPane();
         pane2.setMaxHeight(200);
@@ -51,6 +53,8 @@ public class Grid extends Application {
             }
         }
 
+        pane2.setGridLinesVisible(true);
+
         GridPane pane1 = new GridPane();
         pane1.setMaxHeight(200);
         pane1.setMaxWidth(400);
@@ -58,9 +62,12 @@ public class Grid extends Application {
 
         for (int i=0;i<75;i++){
             for(int j = 0;j<50; j++){
-                pane1.add(new javafx.scene.shape.Rectangle(10,10),i,j);
+                pane1.add(new javafx.scene.shape.Rectangle(10,10, BLACK),i,j);
             }
         }
+
+        pane1.setGridLinesVisible(true);
+
         Button choice1 = new Button("Automated_Game_of_life");
         choice1.setFont(Font.font(14));
         choice1.setTextFill(Color.RED);
