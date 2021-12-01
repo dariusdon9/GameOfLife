@@ -12,6 +12,7 @@ public class Cell extends Thread{
     public int timesFeed = 0;
     public boolean alive = true;
     public Cell(int x, int y){
+
         this.x = x;
         this.y = y;
     }
