@@ -74,8 +74,5 @@ public class Cell extends Thread{
     }
 
 
-    public boolean isAlive1() {
-        boolean state = this.alive;
-        return state;
-    }
+
 }
