@@ -53,17 +53,17 @@ public class DataBase {
         }
     }
 
-    public static void enter(int x, int y, String type) {
+    public static void enter(int x, int y, String type, String name) {
         DataBase.x = x;
         DataBase.y = y;
         DataBase.type = type;
-
-        try{
+        DataBase.name = name;
+        try {
             Connection connection = getConnection();
             assert connection != null;
-            PreparedStatement posted = connection.prepareStatement("INSERT INTO "+name+"(CELL_X_COORDINATE,CELL_Y_COORDINATE,CELL_TYPE)VALUES('"+x+"','"+y+"','" + type +"')");
+            PreparedStatement posted = connection.prepareStatement("INSERT INTO " + name + "(CELL_X_COORDINATE,CELL_Y_COORDINATE,CELL_TYPE)VALUES('" + x + "','" + y + "','" + type + "')");
             posted.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         finally{

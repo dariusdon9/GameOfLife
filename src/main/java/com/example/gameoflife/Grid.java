@@ -177,7 +177,7 @@ public class Grid extends Application {
                                                 pane1.add(rectangle1, xcoord1, ycoord1);
                                                 Cell cell = new Cell(xcoord1,ycoord1," Sexed");
                                                 System.out.println(cell.getX() + " " + cell.getY() + " " + cell.getType());
-                                                enter(cell.getX(), cell.getY(), cell.getType());
+                                                enter(cell.getX(), cell.getY(), cell.getType(), "Auto");
                                                 Thread.sleep(10);
                                             } catch (Exception ex) {
                                                 ex.printStackTrace();
@@ -187,7 +187,7 @@ public class Grid extends Application {
                                                 pane1.add(rectangle2, xcoord2, ycoord2);
                                                 Cell cell = new Cell(xcoord2,xcoord2," Asexual");
                                                 System.out.println(cell.getX() + " " + cell.getY() + " " + cell.getType());
-                                                enter(cell.getX(),cell.getY(),cell.getType());
+                                                enter(cell.getX(), cell.getY(), cell.getType(), "Auto");
                                                 Thread.sleep(10);
                                             } catch (Exception ex) {
                                                 ex.printStackTrace();
@@ -310,12 +310,12 @@ public class Grid extends Application {
                                     pane2.add(rectangle1, xcoord1, ycoord1);
                                     Cell cell = new Cell(xcoord1,ycoord1," Sexed");
                                 try {
-                                    enter(cell.getX(),cell.getY(),cell.getType());
+                                    enter(cell.getX(), cell.getY(), cell.getType(), "Semi");
                                 } catch (Exception ex) {
                                     ex.printStackTrace();
                                 }
-                                    System.out.println(cell.getX() + " " + cell.getY() + cell.getType());
-                                    contor1++;
+                                System.out.println(cell.getX() + " " + cell.getY() + " " + cell.getType());
+                                contor1++;
                             }
                         }
                     }
@@ -330,7 +330,7 @@ public class Grid extends Application {
                                 pane2.add(rectangle2, xcoord2, ycoord2);
                                 Cell cell = new Cell(xcoord2,ycoord2," Asexual");
                                 try {
-                                    enter(cell.getX(),cell.getY(),cell.getType());
+                                    enter(cell.getX(), cell.getY(), cell.getType(), "Semi");
                                 } catch (Exception ex) {
                                     ex.printStackTrace();
                                 }
@@ -428,7 +428,7 @@ public class Grid extends Application {
                             System.out.println(y);
                             Cell cell = new Cell(x,y,"Sexed ");
                             try {
-                                enter(cell.getX(), cell.getY(),cell.getType());
+                                enter(cell.getX(), cell.getY(), cell.getType(), "Manual");
                             } catch (Exception exc) {
                                 exc.printStackTrace();
                             }
@@ -463,7 +463,7 @@ public class Grid extends Application {
                             Cell cell = new Cell(x,y,"Asexed");
                             System.out.println(cell.getX()+ " " + cell.getY() + " " + cell.getType());
                             try {
-                                enter(cell.getX(), cell.getY(),cell.getType());
+                                enter(cell.getX(), cell.getY(), cell.getType(), "Manual");
                             } catch (Exception exc) {
                                 exc.printStackTrace();
                             }
