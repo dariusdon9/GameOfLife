@@ -3,17 +3,14 @@ package com.example.gameoflife;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 
 public class DataBase {
-    public Connection link;
-    public static int count;
     public static int x;
     public static int y;
     public static String type;
     public static String name;
-    public static Connection getConnection()throws Exception, SQLException {
+    public static Connection getConnection() {
        try{
            String driver = "com.mysql.cj.jdbc.Driver";
            String url = "jdbc:mysql://localhost:3306/test";
@@ -33,14 +30,16 @@ public class DataBase {
     public static void refreshTable(String name) throws Exception {
         DataBase.name = name;
         Connection connection = getConnection();
+        assert connection != null;
         PreparedStatement refresh = connection.prepareStatement("DELETE FROM TEST."+name +" " + "WHERE 1=1");
         refresh.executeUpdate();
     }
 
-    public static void createTable(String name) throws Exception{
+    public static void createTable(String name) {
         try{
             DataBase.name = name;
             Connection connection = getConnection();
+            assert connection != null;
             PreparedStatement create = connection.prepareStatement(
                     "CREATE TABLE "+name+"(ID INT NOT NULL AUTO_INCREMENT,CELL_X_COORDINATE INT,CELL_Y_COORDINATE INT,CELL_TYPE VARCHAR(255),PRIMARY KEY(ID))"
             );
@@ -51,16 +50,17 @@ public class DataBase {
         }
         finally{
             System.out.println("Function Complete");
-        };
+        }
     }
 
-    public static void enter(int x, int y, String type)throws Exception{
+    public static void enter(int x, int y, String type) {
         DataBase.x = x;
         DataBase.y = y;
         DataBase.type = type;
 
         try{
             Connection connection = getConnection();
+            assert connection != null;
             PreparedStatement posted = connection.prepareStatement("INSERT INTO "+name+"(CELL_X_COORDINATE,CELL_Y_COORDINATE,CELL_TYPE)VALUES('"+x+"','"+y+"','" + type +"')");
             posted.executeUpdate();
         }catch (Exception e){
