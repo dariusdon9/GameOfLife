@@ -1,6 +1,5 @@
 package com.example.gameoflife;
 
-import static com.example.gameoflife.Food.*;
 import static java.lang.Math.random;
 
 public class Cell extends Thread{
@@ -12,7 +11,6 @@ public class Cell extends Thread{
     public int timesFeed = 0;
     public boolean alive = true;
     public Cell(int x, int y){
-
         this.x = x;
         this.y = y;
     }
@@ -61,10 +59,7 @@ public class Cell extends Thread{
 
 
     public boolean isFed() {
-        if (this.timesFeed >= 10)
-            return true;
-        else
-            return false;
+        return this.timesFeed >= 10;
     }
 
     public void die() {
