@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -113,9 +114,16 @@ public class Grid extends Application {
         refresh1.setAlignment(CENTER);
         refresh1.setFont(Font.font(14));
         refresh1.setOnAction(e-> {
+            String csv = "src/main/java/com/example/gameoflife/ExportManual.csv";
+            File file = new File(csv);
+            file.delete();
+            String csv1 = "src/main/java/com/example/gameoflife/FoodManual.csv";
+            File file1 = new File(csv1);
+            file1.delete();
             for (int i = 0; i < 75; i++) {
                 for (int j = 0; j < 50; j++) {
-                    pane.add(new javafx.scene.shape.Rectangle(10, 10, BLACK), i, j);
+                    pane.getChildren().removeAll();
+                    pane.add(new javafx.scene.shape.Rectangle(10, 10, WHITE), i, j);
                 }
             }
             try {
@@ -143,7 +151,8 @@ public class Grid extends Application {
             }
             for (int i = 0; i < 75; i++) {
                 for (int j = 0; j < 50; j++) {
-                    pane1.add(new javafx.scene.shape.Rectangle(10, 10), i, j);
+                    pane1.getChildren().removeAll();
+                    pane1.add(new javafx.scene.shape.Rectangle(10, 10, WHITE), i, j);
                 }
             }
             try {
@@ -156,6 +165,12 @@ public class Grid extends Application {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            String csv = "src/main/java/com/example/gameoflife/ExportAuto.csv";
+            File file = new File(csv);
+            file.delete();
+            String csv1 = "src/main/java/com/example/gameoflife/FoodAuto.csv";
+            File file1 = new File(csv1);
+            file1.delete();
             pane1.setGridLinesVisible(true);
         });
 
@@ -176,9 +191,15 @@ public class Grid extends Application {
             }
             for (int i = 0; i < 75; i++) {
                 for (int j = 0; j < 50; j++) {
-                    pane2.add(new javafx.scene.shape.Rectangle(10, 10), i, j);
+                    pane2.getChildren().removeAll();
+                    pane2.add(new javafx.scene.shape.Rectangle(10, 10, WHITE), i, j);
                 }
             }
+            String csv = "src/main/java/com/example/gameoflife/ExportSemi.csv";
+            File file = new File(csv);
+            file.delete();
+            String csv1 = "src/main/java/com/example/gameoflife/FoodSemi.csv";
+            File file1 = new File(csv1);
             pane2.setGridLinesVisible(true);
         });
         Button start1 = new Button("Start");
@@ -231,6 +252,7 @@ public class Grid extends Application {
                                                 try {
                                                     pane1.add(rectangle1, xcoord1, ycoord1);
                                                     Cell cell = new Cell(xcoord1, ycoord1, " Sexed");
+                                                    //pane1.getChildren().remove(rectangle1);
 //                                                    (cell.getX() + " " + cell.getY() + " " + cell.getType());
                                                     enter(cell.getX(), cell.getY(), cell.getType(), "Auto");
                                                     Thread.sleep(10);
@@ -241,6 +263,7 @@ public class Grid extends Application {
 
                                                 try {
                                                     pane1.add(rectangle2, xcoord2, ycoord2);
+                                                    //pane1.getChildren().remove(rectangle2);
                                                     Cell cell = new Cell(xcoord2, xcoord2, " Asexual");
                                                     cell.start();
 //                                                    System.out.println(cell.getX() + " " + cell.getY() + " " + cell.getType());
