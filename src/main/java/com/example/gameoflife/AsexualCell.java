@@ -29,7 +29,7 @@ public class AsexualCell extends Cell {
 							children++;
 							child = new AsexualCell(xLocation + i, yLocation + j);
 							map.set(xLocation + i, yLocation + j, child);
-
+							SexualCell.paneGlobal.add(new javafx.scene.shape.Rectangle(10, 10, javafx.scene.paint.Color.BLUE), x, y);
 							//child.start();
 						}
 					}
