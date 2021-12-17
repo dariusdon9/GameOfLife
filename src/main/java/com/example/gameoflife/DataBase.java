@@ -11,6 +11,7 @@ public class DataBase {
     public static String foodname;
     public static String type;
     public static String name;
+    public static int steps;
     public static Connection getConnection() {
        try{
            String driver = "com.mysql.cj.jdbc.Driver";
@@ -38,7 +39,7 @@ public class DataBase {
         }
     }
 
-    public static void getAllCell(String Name) throws SQLException, IOException {
+    public static void getAllCell(String name) throws SQLException, IOException {
         DataBase.name = name;
         Connection connection = getConnection();
         Statement statement;
@@ -71,9 +72,23 @@ public class DataBase {
             create.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
-        }
-        finally{
+        } finally {
             System.out.println("Function Complete");
+        }
+    }
+
+    public static void removedeadcell(int x, int y, String name) {
+        DataBase.x = x;
+        DataBase.y = y;
+        DataBase.name = name;
+
+        try {
+            Connection connection = getConnection();
+            assert connection != null;
+            PreparedStatement deletecell = connection.prepareStatement("DELETE FROM" + name + " WHERE CELL_X_COORDINATE=" + x + "AND CELL_Y_COORDINATE=" + y);
+            deletecell.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -100,5 +115,8 @@ public class DataBase {
         assert connection != null;
         PreparedStatement refresh = connection.prepareStatement("ALTER TABLE " + name + " auto_increment = 0");
         refresh.executeUpdate();
+    }
+
+    public static void enter(int i, int i1, String name) {
     }
 }
